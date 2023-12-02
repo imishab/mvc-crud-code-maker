@@ -1,0 +1,385 @@
+<section>
+    <div class="container mt-2">
+
+        <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add Variables</button>
+        <div class="row mt-5">
+            {{#each products}}
+            <div class="card p-3 mb-3 shadow mb-3 bg-white rounded">
+                <div class="card-body">
+                  <a style="    margin-left: 1044px;
+" href="delete-product/{{this._id}}" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are You Sure to Delete {{this.Mainname}} ?')"><i class="fa fa-trash" aria-hidden="true"></i>
+</a>
+                    <h5 class="mb-3 text-success">{{this.Mainname}}</h5>
+
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapse{{this.Mainname}}">
+                                    Collection.js
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapse{{this.Mainname}}" class="accordion-collapse collapse"
+                                aria-labelledby="panelsStayOpen-heading{{this.Mainname}}">
+                                <div class="accordion-body" style="background-color: blanchedalmond;">
+                                    <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                        id="copyButton">Copy</button><br><br>
+                                    <div class="card py-3">
+                                        <code id="myText"
+                                            style="padding-left: 15px;">{{this.CVname}}_COLLECTION: "{{this.MFname}}",</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}2" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapse{{this.Mainname}}2">
+                                adminHelper.js
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse{{this.Mainname}}2" class="accordion-collapse collapse"
+                            aria-labelledby="panelsStayOpen-heading{{this.Mainname}}2">
+                            <div class="accordion-body" style="background-color: blanchedalmond;">
+                                <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                    id="copyButton">Copy</button><br><br>
+                                <div class="card py-3">
+                                    <code id="myText2" style="padding-left: 15px;">
+                                        <pre>
+<font color="green">///////ADD {{this.Mainname}}/////////////////////</font>                                         
+  add{{this.MFname}}: ({{this.MFname}}, callback) => {
+    console.log({{this.MFname}});
+  {{this.MFname}}.Price = parseInt({{this.MFname}}.Price);
+  db.get()
+    .collection(collections.{{CVname}}_COLLECTION)
+    .insertOne({{this.MFname}})
+    .then((data) => {
+      console.log(data);
+      callback(data.ops[0]._id);
+    });
+  },
+
+<font color="green">///////GET ALL {{this.Mainname}}/////////////////////</font>                                            
+   getAll{{this.MFnames}}: () => {
+    return new Promise(async (resolve, reject) => {
+      let {{this.MFnames}} = await db
+      .get()
+      .collection(collections.{{CVname}}_COLLECTION)
+      .find()
+      .toArray();
+  resolve({{this.MFnames}});
+    });
+  },
+
+<font color="green">///////ADD {{this.Mainname}} DETAILS///////////////////// </font>                                           
+  get{{this.MFname}}Details: ({{this.MFname}}Id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .findOne({ _id: objectId({{this.MFname}}Id)
+  })
+      .then((response) => {
+    resolve(response);
+  });
+  });
+  },
+
+<font color="green">///////DELETE {{this.Mainname}}/////////////////////   </font>                                         
+  delete{{this.MFname}}: ({{this.MFname}}Id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .removeOne({ _id: objectId({{this.MFname}}Id)
+  })
+        .then((response) => {
+    console.log(response);
+    resolve(response);
+  });
+    });
+  },
+
+<font color="green">///////UPDATE {{this.Mainname}}/////////////////////  </font>                                          
+   update{{this.MFname}}: ({{this.MFname}}Id, {{this.MFname}}Details) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .updateOne(
+        { _id: objectId({{this.MFname}}Id)
+  },
+  {
+    $set: {
+      Name: {{this.MFname}}Details.Name,
+        Category: {{this.MFname}}Details.Category,
+          Price: {{this.MFname}}Details.Price,
+            Description: {{this.MFname}}Details.Description,
+            },
+          }
+        )
+        .then((response) => {
+              resolve();
+            });
+    });
+  },
+
+
+<font color="green">///////DELETE ALL {{this.Mainname}}///////////////////// </font>                                           
+  deleteAll{{this.MFnames}}: () => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .remove({})
+      .then(() => {
+        resolve();
+      });
+  });
+  },
+  
+  </pre>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}3" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapse{{this.Mainname}}3">
+                                adminRoute.js
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse{{this.Mainname}}3" class="accordion-collapse collapse"
+                            aria-labelledby="panelsStayOpen-heading{{this.Mainname}}3">
+                            <div class="accordion-body" style="background-color: blanchedalmond;">
+                                <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                    id="copyButton">Copy</button><br><br>
+                                <div class="card py-3">
+                                    <code id="myText3" style="padding-left: 15px;">
+                                        <pre>
+<font color="green">///////ALL {{this.MFname}}///////////////////// </font>                                        
+   router.get("/all-{{this.MFnames}}", verifySignedIn, function (req, res) {
+    let administator = req.session.admin;
+    adminHelper.getAll{{this.MFnames}}().then(({{this.MFnames}}) => {
+      res.render("admin/{{this.MFname}}/all-{{this.MFnames}}", { admin: true, layout:"{{LAYname}}", {{this.MFnames}}, administator });
+    });
+  });
+
+<font color="green">///////ADD {{this.Mainname}}///////////////////// </font>                                        
+  router.get("/add-{{this.MFname}}", verifySignedIn, function (req, res) {
+    let administator = req.session.admin;
+    res.render("admin/{{this.MFname}}/add-{{this.MFname}}", { admin: true, layout:"{{LAYname}}", administator });
+  });
+
+<font color="green">///////ADD {{this.Mainname}}///////////////////// </font>                                        
+  router.post("/add-{{this.MFname}}", function (req, res) {
+    adminHelper.add{{this.MFname}}(req.body, (id) => {
+      let image = req.files.Image;
+      image.mv("./public/images/{{this.MFname}}-images/" + id + ".png", (err, done) => {
+        if (!err) {
+          res.redirect("/admin/{{this.MFname}}/all-{{this.MFnames}}");
+        } else {
+          console.log(err);
+        }
+      });
+    });
+  });
+
+<font color="green">///////EDIT {{this.Mainname}}///////////////////// </font>                                        
+  router.get("/edit-{{this.MFname}}/:id", verifySignedIn, async function (req, res) {
+    let administator = req.session.admin;
+    let {{this.MFname}}Id = req.params.id;
+    let {{this.MFname}} = await adminHelper.get{{this.MFname}}Details({{this.MFname}}Id);
+    console.log({{this.MFname}});
+    res.render("admin/{{this.MFname}}/edit-{{this.MFname}}", { admin: true, layout:"{{LAYname}}", {{this.MFname}}, administator });
+  });
+
+<font color="green">///////EDIT {{this.Mainname}}///////////////////// </font>                                        
+  router.post("/edit-{{this.MFname}}/:id", verifySignedIn, function (req, res) {
+    let {{this.MFname}}Id = req.params.id;
+    adminHelper.update{{this.MFname}}({{this.MFname}}Id, req.body).then(() => {
+      if (req.files) {
+        let image = req.files.Image;
+        if (image) {
+          image.mv("./public/images/{{this.MFname}}-images/" + {{this.MFname}}Id + ".png");
+        }
+      }
+      res.redirect("/admin/{{this.MFname}}/all-{{this.MFnames}}");
+    });
+  });
+
+<font color="green">///////DELETE {{this.Mainname}}///////////////////// </font>                                        
+  router.get("/delete-{{this.MFname}}/:id", verifySignedIn, function (req, res) {
+    let {{this.MFname}}Id = req.params.id;
+    adminHelper.delete{{this.MFname}}({{this.MFname}}Id).then((response) => {
+      fs.unlinkSync("./public/images/{{this.MFname}}-images/" + {{this.MFname}}Id + ".png");
+      res.redirect("/admin/{{this.MFname}}/all-{{this.MFnames}}");
+    });
+  });
+
+<font color="green">///////DELETE ALL {{this.Mainname}}///////////////////// </font>                                        
+  router.get("/delete-all-{{this.MFnames}}", verifySignedIn, function (req, res) {
+    adminHelper.deleteAll{{this.MFnames}}().then(() => {
+      res.redirect("/admin/{{this.MFname}}/all-{{this.MFnames}}");
+    });
+  });
+
+                                        </pre>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Function</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/add-product" enctype="multipart/form-data" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Main Name:</label>
+                        <input type="text" name="Mainname" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="card p-2 shadow p-3 mb-3 bg-white rounded">
+                        <h5 class="text-info">Collection.js</h5>
+
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Collection Variable Name <span
+                                    class="text-danger">(no need of 's')</span>:</label>
+                            <input type="text" name="CVname" class="form-control" id="uppercase">
+                        </div>
+
+                                   <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Function Name <span
+                                    class="text-danger">(without 's')</span>:</label>
+                            <input type="text" name="MFname" class="form-control" id="lowercase">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Function Name <span
+                                    class="text-danger">(with 's')</span>:</label>
+                            <input type="text" name="MFnames" class="form-control" id="lowercase">
+                        </div>
+
+                         <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Layout Name <span
+                                    class="text-danger"></span>:</label>
+                            <input type="text" name="LAYname" class="form-control" id="lowercase">
+                        </div>
+                    </div>
+                  
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+    var inputElement = document.getElementById("uppercase");
+    inputElement.addEventListener("input", function() {
+      var upperCaseValue = inputElement.value.toUpperCase();
+      inputElement.value = upperCaseValue;
+    });
+  });
+</script>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+    var inputElement = document.getElementById("lowercase");
+    inputElement.addEventListener("input", function() {
+      var upperCaseValue = inputElement.value.toLowerCase();
+      inputElement.value = upperCaseValue;
+    });
+  });
+</script>
+
+<script>
+
+    ///text1/////////////////////////////////////////////////////
+    let text = document.getElementById('myText').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+    ///text2/////////////////////////////////////////////////////
+    let text = document.getElementById('myText2').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+    ///text3/////////////////////////////////////////////////////
+    let text = document.getElementById('myText3').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+</script>
+
+<script>
+    function addToCart(productId) {
+        $.ajax({
+            url: "/add-to-cart/" + productId,
+            method: "get",
+            success: (response) => {
+                if (response.status) {
+                    let count = $("#cart-count").html();
+                    count = parseInt(count) + 1;
+                    $("#cart-count").html(count);
+                }
+            },
+        });
+    }
+</script>
